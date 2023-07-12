@@ -1,5 +1,7 @@
 import logo from './logo.svg';
+import FileUploadButton from './fileUpload';
 import './App.css';
+import { TesterButton } from './utility';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         >
           Learn React
         </a>
+        <FileUploadButton/>
+        <TesterButton/>
       </header>
     </div>
   );
