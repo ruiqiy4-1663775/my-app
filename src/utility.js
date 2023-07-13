@@ -33,11 +33,19 @@ async function loginToServiceLayer() {
 }
 
 export function TesterButton() {
-    
-    return (<button onClick ={()=>loginToServiceLayer()}>Hello world</button>)
+  function clickHandler() {
+    const sessionId = loginToServiceLayer();
+  }
+  return (<button onClick ={clickHandler}>Connect to service layer</button>)
 }
 
-export function LoginSuccess() {
-  return (<div>Log In is successful</div>)
+export function LoginSuccess(message) {
+  return (
+    <div className="success-window">
+      <h2>Login Successful</h2>
+      <p>{message}</p>
+    </div>
+  );
+
 }
 
