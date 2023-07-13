@@ -1,22 +1,27 @@
 // This is a utility file that creates button interface for all functionalities.
 
 import axios from 'axios';
-
-const baseURL = 'https://lionsfloormobile.vision33.com/b1s/v1/Login';
+const url = 'http://127.0.0.1:8080/proxy';
 const loginData = {
+  baseURL : "https://lionsfloormobile.vision33.com/sl/b1s/v1/Login",
+  PostData: {
   UserName: "ryu",
   Password: "1234",
   CompanyDB: "LIONSFLOOR"
+  }
 };
 
 async function loginToServiceLayer() {
   try {
     console.log("loging in...")
-    const response = await axios.post(baseURL, loginData);
+    const response = await axios.post(url,loginData);
 
     if (response.status === 200) {
+      console.log("sucessfully get the response...\n\n")
+      console.log("here is response:\n\n\n\n\n")
+      console.log(response)
       const sessionId = response.data.SessionId;
-      console.log('Login successful! Session ID:', sessionId);
+      console.log('Login successful! \nSession ID:', sessionId);
       return sessionId;
     } else {
       throw new Error('Login failed.');
@@ -30,5 +35,9 @@ async function loginToServiceLayer() {
 export function TesterButton() {
     
     return (<button onClick ={()=>loginToServiceLayer()}>Hello world</button>)
+}
+
+export function LoginSuccess() {
+  return (<div>Log In is successful</div>)
 }
 
