@@ -1,4 +1,4 @@
-// This is a utility file that creates button interface for all functionalities.
+// This is a utility file that includes the functions that can be imported by JSX
 
 import axios from 'axios';
 
