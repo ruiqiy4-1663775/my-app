@@ -1,6 +1,7 @@
 // This is a utility file that creates button interface for all functionalities.
 
 import axios from 'axios';
+
 const url = 'http://127.0.0.1:8080/proxy';
 const loginData = {
   baseURL : "https://lionsfloormobile.vision33.com/sl/b1s/v1/Login",
@@ -11,7 +12,9 @@ const loginData = {
   }
 };
 
-async function loginToServiceLayer() {
+// This functiuon login to the service layer and return the session id
+// eslint-disable-next-line
+export async function loginToServiceLayer() {
   try {
     console.log("loging in...")
     const response = await axios.post(url,loginData);
@@ -32,20 +35,8 @@ async function loginToServiceLayer() {
   }
 }
 
-export function TesterButton() {
-  function clickHandler() {
-    const sessionId = loginToServiceLayer();
-  }
-  return (<button onClick ={clickHandler}>Connect to service layer</button>)
-}
 
-export function LoginSuccess(message) {
-  return (
-    <div className="success-window">
-      <h2>Login Successful</h2>
-      <p>{message}</p>
-    </div>
-  );
 
-}
+
+
 
