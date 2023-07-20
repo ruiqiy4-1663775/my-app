@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import {loginToServiceLayer} from './utility'
 
-export function TesterButton() {
+export function Login() {
     const [sessionId, setsessionId] = useState("");
     function clickHandler() {
       loginToServiceLayer()
