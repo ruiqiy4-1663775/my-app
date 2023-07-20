@@ -1,32 +1,53 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+import * as XLSX from 'xlsx';
 
-const FileUploadButton = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+function ExcelReader() {
+    const [items, setItems] = useState({});
 
-  const fileChangeHandler = event => {
-    setSelectedFile(event.target.files[0]);
-  };
+    const handleFileUpload = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+            // Parse data
+            const bstr = evt.target.result;
+            const wb = XLSX.read(bstr, { type: 'binary' });
+            // Get first worksheet
+            const wsname = wb.SheetNames[0];
+            const ws = wb.Sheets[wsname];
+            // Convert array of arrays
+            const data = XLSX.utils.sheet_to_json(ws, {header: 1});
+            // Create an object from the data
+            const object = data.reduce((obj, row) => {
+                obj[row[0]] = row[1];
+                return obj;
+            }, {});
+            // Update state
+            setItems(object);
+        };
+        reader.readAsBinaryString(file);
+      } else {
+        setItems({});
+      }
+    }
 
-  const fileUploadHandler = () => {
-    const formData = new FormData();
+    return (
+        <div className='w-3/12 border p-2 space-y-1.5'>
+          <h1>Special price update</h1>
+          <input
+              type="file"
+              accept=".xlsx,.xls"
+              id="file_input"
+              onChange={handleFileUpload}
+              className="block text-sm rounded-lg text-gray-400 cursor-pointer"
+              aria-describedby="file_input_help"
+          />
+          <p className="mt-1 text-sm text-gray-500" id="file_input_help">upload the excel sheet here </p>
+          <pre>
+              {JSON.stringify(items, null, 2)}
+          </pre>
+        </div>
+    );
+}
 
-    // Update the formData object 
-    formData.append('file', selectedFile);
-
-    // Request made to the backend api 
-    // Send formData object 
-    axios.post('http://localhost:8080/upload', formData)
-      .then(res => console.log(res))
-      .catch(err => console.error(err));
-  };
-
-  return (
-    <div>
-      <input type="file" onChange={fileChangeHandler} />
-      <button onClick={fileUploadHandler}>Upload</button>
-    </div>
-  );
-};
-
-export default FileUploadButton;
+export default ExcelReader;

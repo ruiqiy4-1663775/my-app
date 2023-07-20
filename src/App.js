@@ -5,7 +5,7 @@ import { TesterButton } from './login';
 
 function App() {
   return (
-    <div className="bg-sky-200 text-white p-8 min-h-screen">
+    <div className="bg-gray-800 text-white p-8 min-h-screen">
       <TesterButton/>
       <img src={logo} className="App-logo" alt="logo" />
       <FileUploadButton/>
