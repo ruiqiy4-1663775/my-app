@@ -19,8 +19,12 @@ function ExcelReader() {
             const data = XLSX.utils.sheet_to_json(ws, {header: 1});
             // Create an object from the data
             const object = data.reduce((obj, row) => {
-                obj[row[0]] = row[1];
-                return obj;
+              if (row.length === 2) {
+                  obj[row[0]] = row[1];
+              } else {
+                  console.log('Ignoring row with less than 2 elements:', row);
+              }
+              return obj;
             }, {});
             // Update state
             setItems(object);
