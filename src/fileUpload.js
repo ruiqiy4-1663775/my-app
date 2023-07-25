@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import * as XLSX from 'xlsx';
+import {priceUpdate} from './utility';
 
 function ExcelReader() {
     const [items, setItems] = useState({});
@@ -35,6 +36,11 @@ function ExcelReader() {
       }
     }
 
+    async function handleClick() {
+      let response = await priceUpdate(items)
+      console.log(response);
+    }
+
     return (
         <div className='w-3/12 border p-2 space-y-1.5'>
           <h1>Special price update</h1>
@@ -50,6 +56,7 @@ function ExcelReader() {
           <pre>
               {JSON.stringify(items, null, 2)}
           </pre>
+          <button onClick={handleClick}>Update</button>
         </div>
     );
 }
