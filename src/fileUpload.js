@@ -3,7 +3,7 @@ import * as XLSX from 'xlsx';
 import {priceUpdate} from './utility';
 
 function ExcelReader() {
-    const [items, setItems] = useState({});
+    const [items, setItems] = useState();
 
     const handleFileUpload = (e) => {
       const file = e.target.files[0];
@@ -22,8 +22,6 @@ function ExcelReader() {
             const object = data.reduce((obj, row) => {
               if (row.length === 2) {
                   obj[row[0]] = row[1];
-              } else {
-                  console.log('Ignoring row with less than 2 elements:', row);
               }
               return obj;
             }, {});
@@ -31,8 +29,8 @@ function ExcelReader() {
             setItems(object);
         };
         reader.readAsBinaryString(file);
-      } else {
-        setItems({});
+        // Reset the file input after handling
+        e.target.value = '';
       }
     }
 
@@ -53,9 +51,9 @@ function ExcelReader() {
               aria-describedby="file_input_help"
           />
           <p className="mt-1 text-sm text-gray-500" id="file_input_help">upload the excel sheet here </p>
-          <pre>
+          {items && <pre>
               {JSON.stringify(items, null, 2)}
-          </pre>
+          </pre>}
           <button onClick={handleClick}>Update</button>
         </div>
     );

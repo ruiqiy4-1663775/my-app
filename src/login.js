@@ -1,8 +1,15 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import {loginToServiceLayer} from './utility'
 
 export function Login() {
     const [sessionId, setsessionId] = useState("");
+
+    useEffect(() => {
+      loginToServiceLayer().then(id => {
+        setsessionId(id);
+      })
+    }, [])
+
     function clickHandler() {
       loginToServiceLayer()
       .then(id => {
