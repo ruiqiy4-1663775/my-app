@@ -1,52 +1,31 @@
 import { useState } from 'react';
-import * as XLSX from 'xlsx';
-import {priceUpdate} from './utility';
+// import {priceUpdate} from './utility';
+import Modal from './popup';
+import { handleFileUpload } from './utility';
 
-function ExcelReader() {
+function FileUpload({priceUpdate, title}) {
     const [items, setItems] = useState();
-
-    const handleFileUpload = (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (evt) => {
-            // Parse data
-            const bstr = evt.target.result;
-            const wb = XLSX.read(bstr, { type: 'binary' });
-            // Get first worksheet
-            const wsname = wb.SheetNames[0];
-            const ws = wb.Sheets[wsname];
-            // Convert array of arrays
-            const data = XLSX.utils.sheet_to_json(ws, {header: 1});
-            // Create an object from the data
-            const object = data.reduce((obj, row) => {
-              if (row.length === 2) {
-                  obj[row[0]] = row[1];
-              }
-              return obj;
-            }, {});
-            // Update state
-            setItems(object);
-        };
-        reader.readAsBinaryString(file);
-        // Reset the file input after handling
-        e.target.value = '';
-      }
-    }
+    const [message, setMessage] = useState(null);
 
     async function handleClick() {
-      let response = await priceUpdate(items)
-      console.log(response);
+      try {
+        setMessage("Updating, Please wait...")
+        let response = await priceUpdate(items)
+        setMessage(response.data);
+        console.log(response);
+      } catch(error) {
+        setMessage("Update is not successful. You may restart the program and try again")
+      }
     }
 
     return (
         <div className='w-3/12 border p-2 space-y-1.5'>
-          <h1>Special price update</h1>
+          <h1>{title}</h1>
           <input
               type="file"
               accept=".xlsx,.xls"
               id="file_input"
-              onChange={handleFileUpload}
+              onChange={(e) => {handleFileUpload(e, setItems)}}
               className="block text-sm rounded-lg text-gray-400 cursor-pointer"
               aria-describedby="file_input_help"
           />
@@ -55,8 +34,11 @@ function ExcelReader() {
               {JSON.stringify(items, null, 2)}
           </pre>}
           <button onClick={handleClick}>Update</button>
+          {message && <Modal closeModal={() => {setMessage(null)}}>
+            {message}
+          </Modal>}
         </div>
     );
 }
 
-export default ExcelReader;
+export default FileUpload;
