@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Modal from './popup';
 import { handleFileUpload } from './utility';
 
-function FileUpload({priceUpdate, title}) {
+function FileUpload({priceUpdate, title, indexArray}) {
     const [items, setItems] = useState();
     const [message, setMessage] = useState(null);
 
@@ -14,6 +14,7 @@ function FileUpload({priceUpdate, title}) {
         setMessage(response.data);
         console.log(response);
       } catch(error) {
+        console.log(error);
         setMessage("Update is not successful. You may restart the program and try again")
       }
     }
@@ -25,7 +26,7 @@ function FileUpload({priceUpdate, title}) {
               type="file"
               accept=".xlsx,.xls"
               id="file_input"
-              onChange={(e) => {handleFileUpload(e, setItems)}}
+              onChange={(e) => {handleFileUpload(e, indexArray, setItems)}}
               className="block text-sm rounded-lg text-gray-400 cursor-pointer"
               aria-describedby="file_input_help"
           />
