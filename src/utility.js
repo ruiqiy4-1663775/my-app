@@ -56,35 +56,6 @@ export function handleFileUpload(e, indexArray,setItems) {
   }
 }
 
-// export function handleFileUpload(e, setItems) {
-//   const file = e.target.files[0];
-//   if (file) {
-//     const reader = new FileReader();
-//     reader.onload = (evt) => {
-//         // Parse data
-//         const bstr = evt.target.result;
-//         const wb = XLSX.read(bstr, { type: 'binary' });
-//         // Get first worksheet
-//         const wsname = wb.SheetNames[0];
-//         const ws = wb.Sheets[wsname];
-//         // Convert array of arrays
-//         const data = XLSX.utils.sheet_to_json(ws, {header: 1});
-//         // Create an object from the data
-//         const object = data.reduce((obj, row) => {
-//           if (row.length === 2) {
-//               obj[row[0]] = row[1];
-//           }
-//           return obj;
-//         }, {});
-//         // Update state
-//         setItems(object);
-//     };
-//     reader.readAsBinaryString(file);
-//     // Reset the file input after handling
-//     e.target.value = '';
-//   }
-// }
-
 
 
 
