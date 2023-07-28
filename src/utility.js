@@ -27,6 +27,7 @@ export async function priceUpdateMolding(form) {
   return response;
 }
 
+// This function parse the rows of excel into maps.
 export function handleFileUpload(e, indexArray,setItems) {
   const file = e.target.files[0];
   if (file) {
