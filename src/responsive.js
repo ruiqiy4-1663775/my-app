@@ -1,4 +1,27 @@
-function Res() {
+import { useState } from "react";
+
+const Details = ({ content, clearSelected }) => {
+    return (
+        // Could put a grid box here to make it responsive
+        // The width of this should be the same as the width of the table
+        // add some animation on this potentially
+      <div>
+    {/* //     <h1>{song.title}</h1>
+    //     <p>{song.artist}</p>
+    //     <p>{song.year}</p> */}
+        <button onClick={clearSelected}>Back to table</button>
+      </div>
+    );
+  };
+
+function Res({data}) {
+    const [selectedRow, setSelectedRow] = useState(null);
+    const headers = [...new Set(data.flatMap(Object.keys))];
+    if (selectedRow) {
+        return (
+            <Details content={selectedRow} clearSelected={() => setSelectedRow(null)}></Details>
+        )
+    }
     return (
         <div className="overflow-x-auto">
             <div className="table min-w-max">
@@ -14,6 +37,13 @@ function Res() {
                     </div>
                 </div>
                 <div className="table-row-group">
+                    {data.map((row, rowIndex) => (
+                        <div className="table-row" key={rowIndex}>
+                            {headers.map((key, cellIndex) =>
+                                <div className="table-cell " key={cellIndex}> {row[key]} </div>
+                            )}    
+                        </div>
+                    ))}
                     <div className="table-row">
                         <div className="table-cell ">The Sliding Mr. Bones (Next Stop, Pottersville)</div>
                         <div className="table-cell ">The Sliding Mr. Bones (Next Stop, Pottersville)</div>
