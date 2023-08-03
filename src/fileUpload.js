@@ -59,7 +59,7 @@ export function FileUploadv2({priceUpdate, title}) {
   }
 
   return (
-      <div className='w-full md:w-4/12 overflow-y-auto space-y-1.5 border min-h-60 p-2'>
+      <div className='w-full md:w-4/12 overflow-y-auto space-y-1.5 border p-2'>
         <h1>{title}</h1>
         <input
             type="file"
