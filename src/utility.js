@@ -27,6 +27,16 @@ export async function priceUpdateMolding(form) {
   return response;
 }
 
+export async function priceUpdateTier(array) {
+  let chunkSize = 10;
+  for (let i = 0; i < array.length; i += chunkSize) {
+    const chunk = array.slice(i, i + chunkSize);
+    // console.log(chunk);
+    const response = await axios.post(`${baseURL}/priceTier`, chunk)
+  }
+  return 'ok';
+}
+
 // This function parse the rows of excel into maps.
 export function handleFileUpload(e, indexArray,setItems) {
   const file = e.target.files[0];
@@ -56,6 +66,24 @@ export function handleFileUpload(e, indexArray,setItems) {
     e.target.value = '';
   }
 }
+
+export const handleFileUploadv2 = (event, setItems) => {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+  reader.onload = (evt) => {
+    // Parse data
+    const bstr = evt.target.result;
+    const workbook = XLSX.read(bstr, { type: 'binary' });
+    // Get first worksheet
+    const wsname = workbook.SheetNames[0];
+    const ws = workbook.Sheets[wsname];
+    // Convert array of arrays
+    const data = XLSX.utils.sheet_to_json(ws, { header: 0 });
+    // Update state
+    setItems(data);
+  };
+  reader.readAsBinaryString(file);
+};
 
 
 
