@@ -5,6 +5,7 @@ import * as XLSX from 'xlsx';
 
 const baseURL = 'http://127.0.0.1:8080';
 // const baseURL = '';
+
 export async function loginToServiceLayer() {
   try {
     const response = await axios.get(`${baseURL}/login`);
@@ -32,9 +33,8 @@ export async function priceUpdateTier(array) {
   for (let i = 0; i < array.length; i += chunkSize) {
     const chunk = array.slice(i, i + chunkSize);
     // console.log(chunk);
-    const response = await axios.post(`${baseURL}/priceTier`, chunk)
+    await axios.post(`${baseURL}/priceTier`, chunk)
   }
-  return 'ok';
 }
 
 // This function parse the rows of excel into maps.
