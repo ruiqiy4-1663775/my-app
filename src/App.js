@@ -5,9 +5,16 @@ import axios from 'axios';
 import { useState } from 'react';
 import { format } from 'date-fns-tz';
 import DisableAutoCheck from './DisableAutoCheck';
+import MatchPriceTier from './MatchPriceTier';
+import LoginForm from './SimpleCredential';
 
 function App() {
   const [data, setData] = useState(null)
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  if (!loggedIn) {
+    return <LoginForm setLoggedIn={setLoggedIn}></LoginForm>
+  }
   
   async function getDate() {
     const response = await axios.get('http://127.0.0.1:8080/date')
@@ -21,8 +28,9 @@ function App() {
         <Login />
         <FileUpload priceUpdate={priceUpdate} title={'Special price update Flooring'} indexArray={[1, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]} />
         <FileUpload priceUpdate={priceUpdateMolding} title={'Special price update Molding'} indexArray={[1, 6, 7, 8, 9, 10]} />
-        <FileUploadv2 priceUpdate={priceUpdateTier} title={'Special price tier matching'} />
+        <FileUploadv2 priceUpdate={priceUpdateTier} title={'Special price match price list'} />
         <DisableAutoCheck></DisableAutoCheck>
+        <MatchPriceTier />
         <button> </button>
         <button onClick={getDate}>Get date</button>
         {data && <p>{format(new Date(data), 'yyyy-MM-dd HH:mm:ss')}</p>}

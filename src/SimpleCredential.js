@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
-function Login() {
+const users = [
+  {username: 'dbrashier', password: '1234'},
+  {username: 'sklemens', password: '1234'},
+  {username: 'tuhunhake', password: '1234'}
+]
+
+function LoginForm({setLoggedIn}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
 
   const handleLogin = () => {
-    axios.post('/api/login', { username, password })
-      .then((response) => {
-        setMessage(response.data.message);
-      })
-      .catch((error) => {
-        console.error(error);
-        setMessage('Login failed');
-      });
+    for (let user of users) {
+      if (user.username === username && user.password === password) {
+        // success
+        setLoggedIn(true)
+      }
+    }
   };
 
   return (
@@ -44,11 +46,10 @@ function Login() {
           >
             Login
           </button>
-          <div className="text-red-600">{message}</div>
         </div>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default LoginForm;
