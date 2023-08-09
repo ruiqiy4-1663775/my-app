@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 const users = [
   {username: 'dbrashier', password: '1234'},
   {username: 'sklemens', password: '1234'},
-  {username: 'tuhunhake', password: '1234'}
+  {username: 'tuhlenhake', password: '1234'},
+  {username: 'test', password: '1'}
 ]
 
 function LoginForm({setLoggedIn}) {
@@ -14,7 +15,7 @@ function LoginForm({setLoggedIn}) {
     for (let user of users) {
       if (user.username === username && user.password === password) {
         // success
-        setLoggedIn(true)
+        setLoggedIn(user.username)
       }
     }
   };

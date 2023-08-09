@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Modal from './popup';
 import { handleFileUpload, handleFileUploadv2 } from './utility';
 
-function FileUpload({priceUpdate, title, indexArray}) {
+function FileUpload({priceUpdate, title, indexArray, username}) {
     const [items, setItems] = useState();
     const [message, setMessage] = useState(null);
 
@@ -13,6 +13,7 @@ function FileUpload({priceUpdate, title, indexArray}) {
         let response = await priceUpdate(items)
         setMessage(response.data);
         console.log(response);
+        console.log(`\n\n ${username} change the price at ${Date()}`)
       } catch(error) {
         console.log(error);
         setMessage("Update is not successful. You may restart the program and try again")
@@ -34,7 +35,7 @@ function FileUpload({priceUpdate, title, indexArray}) {
           {items && <pre>
               {JSON.stringify(items, null, 2)}
           </pre>}
-          <button onClick={handleClick}>Update</button>
+          <button className='bg-cyan-500 hover:bg-cyan-600 rounded-full px-8 text-base' onClick={handleClick}>Update</button>
           {message && <Modal closeModal={() => {setMessage(null)}}>
             {message}
           </Modal>}
@@ -42,7 +43,7 @@ function FileUpload({priceUpdate, title, indexArray}) {
     );
 }
 
-export function FileUploadv2({priceUpdate, title}) {
+export function FileUploadv2({priceUpdate, title, username}) {
   const [items, setItems] = useState();
   const [message, setMessage] = useState(null);
 
@@ -70,7 +71,7 @@ export function FileUploadv2({priceUpdate, title}) {
             aria-describedby="file_input_help"
         />
         <p className="mt-1 text-sm text-gray-500" id="file_input_help">upload the excel sheet here </p>
-        <button onClick={handleClick}>Update</button>
+        <button className='bg-cyan-500 hover:bg-cyan-600 rounded-full px-8 text-base' onClick={handleClick}>Update</button>
         {items && <pre>
             {JSON.stringify(items, null, 2)}
         </pre>}
