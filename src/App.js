@@ -8,7 +8,6 @@ import LoginForm from './SimpleCredential';
 
 function App() {
   const [username, setUsername] = useState(null)
-
   const handleClick = () => {
     setUsername(null)
   }
