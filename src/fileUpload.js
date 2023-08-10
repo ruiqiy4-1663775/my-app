@@ -10,7 +10,7 @@ function FileUpload({priceUpdate, title, indexArray, username}) {
     async function handleClick() {
       try {
         setMessage("Updating, Please wait...")
-        let response = await priceUpdate(items)
+        let response = await priceUpdate(items, username)
         setMessage(response.data);
         console.log(response);
         console.log(`\n\n ${username} change the price at ${Date()}`)
