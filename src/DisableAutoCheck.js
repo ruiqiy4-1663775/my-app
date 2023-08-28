@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useState } from "react";
+import { BACKEND_URL } from "./constants";
 
 function DisableAutoCheck({username}) {
     const [message, setMessage] = useState(null);
@@ -7,7 +8,8 @@ function DisableAutoCheck({username}) {
         try {
             console.log(`\n\n at ${Date()} ${username} started unchecking auto`)
             setMessage('unchecking auto box')
-            await axios.get('http://127.0.0.1:8080/uncheckauto')
+            // await axios.get('http://127.0.0.1:8080/uncheckauto')
+            await axios.get(BACKEND_URL + '/uncheckauto')
             setMessage('uncheck success')
             
         } catch (err) {

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 const users = [
-  {username: 'dbrashier', password: '1234'},
-  {username: 'sklemens', password: '1234'},
-  {username: 'tuhlenhake', password: '1234'},
-  {username: 'test', password: '1'}
+  {username: 'dbrashier', password: '2578'},
+  {username: 'sklemens', password: '0743'},
+  {username: 'tuhlenhake', password: '6543'},
+  {username: 'test', password: '1234'}
 ]
 
 function LoginForm({setLoggedIn}) {

@@ -1,12 +1,14 @@
 import axios from "axios"
 import { useState } from "react";
+import { BACKEND_URL } from "./constants";
 
 function MatchPriceTier({username}) {
     const [message, setMessage] = useState(null);
     async function handleClick() {
         try {
             setMessage('match price tier')
-            await axios.get('http://127.0.0.1:8080/priceTierbutton')
+            await axios.get(BACKEND_URL + '/priceTierbutton')
+            // await axios.get('http://127.0.0.1:8080/priceTierbutton')
             setMessage('success')
             console.log(`\n\n at ${Date()} ${username} clicked match price tier button`)
         } catch (err) {

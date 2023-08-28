@@ -2,13 +2,13 @@
 
 import axios from 'axios';
 import * as XLSX from 'xlsx';
-
+import { BACKEND_URL } from './constants';
 const baseURL = 'http://127.0.0.1:8080';
 // const baseURL = '';
 
 export async function loginToServiceLayer() {
   try {
-    const response = await axios.get(`${baseURL}/login`);
+    const response = await axios.get(`${BACKEND_URL}/login`);
     console.log("login complete: ", response)
     return response.data;
   } catch (error) {
@@ -20,13 +20,13 @@ export async function loginToServiceLayer() {
 // this function send out the price update form to server and return response
 export async function priceUpdate(form, username) {
   let data = { info: form, username: username }
-  const response = await axios.post(`${baseURL}/specialPrice`, data)
+  const response = await axios.post(`${BACKEND_URL}/specialPrice`, data)
   return response;
 }
 
 export async function priceUpdateMolding(form, username) {
   let data = { info: form, username: username }
-  const response = await axios.post(`${baseURL}/specialPriceMolding`, data)
+  const response = await axios.post(`${BACKEND_URL}/specialPriceMolding`, data)
   return response;
 }
 
@@ -35,7 +35,7 @@ export async function priceUpdateTier(array) {
   for (let i = 0; i < array.length; i += chunkSize) {
     const chunk = array.slice(i, i + chunkSize);
     // console.log(chunk);
-    await axios.post(`${baseURL}/priceTier`, chunk)
+    await axios.post(`${BACKEND_URL}/priceTier`, chunk)
   }
 }
 
