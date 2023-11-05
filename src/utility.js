@@ -3,8 +3,6 @@
 import axios from 'axios';
 import * as XLSX from 'xlsx';
 import { BACKEND_URL } from './constants';
-const baseURL = 'http://127.0.0.1:8080';
-// const baseURL = '';
 
 export async function loginToServiceLayer() {
   try {
@@ -29,6 +27,12 @@ export async function priceUpdateMolding(form, username) {
   const response = await axios.post(`${BACKEND_URL}/specialPriceMolding`, data)
   return response;
 }
+
+export async function priceUpdatePriceList(form) {
+    console.log(form)
+    const response = await axios.post(`${BACKEND_URL}/updatePriceList`, form)
+    return response;
+  }
 
 export async function priceUpdateTier(array) {
   let chunkSize = 10;

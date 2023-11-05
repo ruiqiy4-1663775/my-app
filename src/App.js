@@ -1,10 +1,11 @@
-import FileUpload, { FileUploadv2 } from './fileUpload';
+import FileUpload from './fileUpload';
 import { Login } from './login';
-import { priceUpdate, priceUpdateMolding, priceUpdateTier } from './utility';
+import { priceUpdate, priceUpdateMolding, priceUpdatePriceList } from './utility';
 import { useState } from 'react';
 import DisableAutoCheck from './DisableAutoCheck';
 import MatchPriceTier from './MatchPriceTier';
 import LoginForm from './SimpleCredential';
+import UpdatePriceList from './UpdatePriceList';
 
 function App() {
   const [username, setUsername] = useState(null)
@@ -24,7 +25,9 @@ function App() {
         <Login />
         <FileUpload username = {username} priceUpdate={priceUpdate} title={'Special price update Flooring'} indexArray={[1, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]} />
         <FileUpload username = {username} priceUpdate={priceUpdateMolding} title={'Special price update Molding'} indexArray={[1, 6, 7, 8, 9, 10]} />
-        <FileUploadv2 username = {username} priceUpdate={priceUpdateTier} title={'Special price match price list'} />
+        <UpdatePriceList priceUpdate={priceUpdatePriceList} title={'Update Price List'} indexArray={[1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]} />
+        
+        {/* <FileUploadv2 username = {username} priceUpdate={priceUpdateTier} title={'Special price match price list'} /> */}
         <DisableAutoCheck username = {username}></DisableAutoCheck>
         <MatchPriceTier username = {username} />
       </div>
