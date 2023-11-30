@@ -24,6 +24,8 @@ function App() {
       <div id='scroll' className=' w-full grow h-min-0 flex flex-col items-center space-y-10 overflow-y-auto'>
         <Login />
         <FileUpload username = {username} priceUpdate={priceUpdate} title={'Special price update Flooring'} indexArray={[1, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]} />
+        {/* <FileUpload username = {username} priceUpdate={priceUpdate} title={'Special price update Flooring'} indexArray={[1, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]} /> */}
+{/*  */}
         <FileUpload username = {username} priceUpdate={priceUpdateMolding} title={'Special price update Molding'} indexArray={[1, 6, 7, 8, 9, 10]} />
         <UpdatePriceList priceUpdate={priceUpdatePriceList} title={'Update Price List'} indexArray={[1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]} />
         
