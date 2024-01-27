@@ -11,7 +11,7 @@ function App() {
   const [username, setUsername] = useState(null)
   const handleClick = () => {
     setUsername(null)
-  }
+}
 
   if (!username) {
     return <LoginForm setLoggedIn={setUsername}></LoginForm>
