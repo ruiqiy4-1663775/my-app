@@ -8,14 +8,12 @@ function MatchPriceTier({username}) {
         try {
             setMessage('match price tier')
             await axios.get(BACKEND_URL + '/priceTierbutton')
-            // await axios.get('http://127.0.0.1:8080/priceTierbutton')
             setMessage('success')
             console.log(`\n\n at ${Date()} ${username} clicked match price tier button`)
         } catch (err) {
             setMessage('an error occured')
             console.log(err)
         }
-        
     }
 
     return (

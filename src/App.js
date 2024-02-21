@@ -6,6 +6,7 @@ import DisableAutoCheck from './DisableAutoCheck';
 import MatchPriceTier from './MatchPriceTier';
 import LoginForm from './SimpleCredential';
 import UpdatePriceList from './UpdatePriceList';
+import UpdateCommisionTable from './UpdateCommissionTable';
 
 function App() {
     const [username, setUsername] = useState(null)
@@ -28,6 +29,7 @@ function App() {
                 <UpdatePriceList priceUpdate={priceUpdatePriceList} title={'Update Price List'} indexArray={[1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]} />
                 <DisableAutoCheck username={username}></DisableAutoCheck>
                 <MatchPriceTier username={username} />
+                <UpdateCommisionTable />
             </div>
         </div>
     );
